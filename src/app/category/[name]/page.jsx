@@ -17,8 +17,12 @@ export default function CategoryPage() {
   console.log("Params =", params);
   console.log("Filtered Foods =", filteredFoods);
 
+  if(!filteredFoods) {
+    return <p className="text-center text-2xl ">loading...</p>
+  }
+
   return (
-    <div className="pt-22 px-4 container mx-auto">
+    <div className="pt-22 px-4 container mb-12 mx-auto">
       <h1 className="text-2xl font-bold mb-4">Category: {name}</h1>
 
       {filteredFoods.length === 0 ? (
@@ -26,10 +30,10 @@ export default function CategoryPage() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 ">
           {filteredFoods.map(food => (
-            <div key={food._id} className="border p-4 rounded-lg hover:shadow-blue-600 shadow-sm hover:scale-105 transition-all duration-500">
+            <div key={food._id} className=" p-4 rounded-lg hover:shadow-blue-600 shadow-sm hover:scale-105 transition-all duration-500">
               <img src={food.image} alt={food.title} className="w-full h-40 object-cover rounded-md mb-2 hover:scale-110 transition-all duration-500" />
               <h2 className="text-lg font-semibold">{food.title}</h2>
-              <Link href={food._id}>
+              <Link href={`/FoodDetails/${food._id}`}>
                 <p className="text-blue-400 flex items-center gap-1 hover:underline text-sm">See info<BadgeInfo size={16} /></p>
               </Link>
               <p className="text-green-500">৳ {food.price}</p>

@@ -3,19 +3,20 @@
 import useAxiosPublic from "@/app/Hooks/useAxiosPublic";
 import { BadgeInfo, MapPinCheck, Star } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { MdOutlineMarkEmailRead } from "react-icons/md";
 import React, { useEffect, useState } from "react";
+import { FaPhone } from "react-icons/fa";
 
 export default function Restaurant() {
   const axiosPublic = useAxiosPublic();
-  const [restaurants, setRestaurants] = useState([]); // ✅ state added
+  const [restaurants, setRestaurants] = useState([]); 
 
   useEffect(() => {
     const fetchRestaurant = async () => {
       try {
         const res = await axiosPublic.get("/api/restaurant");
         const data = res.data.data;
-        setRestaurants(data); // ✅ save to state
+        setRestaurants(data); 
       } catch (err) {
         console.error(err);
       }
@@ -46,20 +47,20 @@ export default function Restaurant() {
 
             <div className="p-4 space-y-1">
               <h2 className="text-lg font-semibold flex gap-2 justify-between ">
-                {restaurant.name} <span className="items-center flex gap-1 text-sm text-gray-400 ">gulshan,Dhaka <MapPinCheck  size={10}/></span>
+                {restaurant.name} <span className="items-center flex gap-1 text-sm text-gray-400 "><MapPinCheck className="text-green-500" size={16}/> Gulshan,Dhaka </span>
               </h2>
-
-              <Link href={`/${restaurant._id}`}>
-                <p className="text-blue-400 flex items-center gap-1 hover:underline text-sm">
-                  See info <BadgeInfo size={16} />
+              <p className="flex items-center gap-1 text-gray-400"><MdOutlineMarkEmailRead className="text-black"/> {restaurant.email}</p>
+              <p className="flex items-center gap-1 text-gray-400"><FaPhone className="text-black"/> {restaurant.phone}</p>
+                <p className="text-gray-400 text-sm">
+                  {restaurant.aboutRestaurant}
                 </p>
-              </Link>
+              
 
               <div className="flex justify-between items-center py-3 mx-2">
                 {restaurant.isActive ? (
-                  <p className="text-white px-2 border-gray-500 bg-green-600 rounded-sm">Open</p>
+                  <p className="text-white px-2 border-gray-500 bg-green-300 rounded-sm">Open</p>
                 ) : (
-                  <p className="text-white bg-red-500 border-red-600 px-2 rounded-sm">Close</p>
+                  <p className="text-white bg-red-300 border-red-600 px-2 rounded-sm">Close</p>
                 )}
 
                 <div className="flex items-center gap-1">

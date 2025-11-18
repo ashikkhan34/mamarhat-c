@@ -32,7 +32,7 @@ export default function Category() {
             href={`/category/${cat.name}`}
             className="group"
           >
-            <div className="bg-white shadow-sm hover:shadow-pink-500 transition-shadow-pink duration-300 rounded-xl p-4 border flex flex-col items-center cursor-pointer">
+            <div className="bg-white shadow-sm hover:shadow-pink-500 transition-shadow-pink duration-300 rounded-xl p-4 flex flex-col items-center cursor-pointer">
 
               <img
                 src={cat.image}

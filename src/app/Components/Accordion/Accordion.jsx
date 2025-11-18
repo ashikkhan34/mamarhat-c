@@ -24,7 +24,7 @@ export default function Accordion() {
   ];
 
   return (
-    <div className="max-w-xl mx-auto mt-10">
+    <div className="max-w-xl mx-auto mt-10 mb-20">
         <h1 className="text-3xl text-center font-semibold p-12">FAQ Questions</h1>
       {items.map((item, i) => (
         <div key={i} className="border-b border-blue-600 rounded mb-3">

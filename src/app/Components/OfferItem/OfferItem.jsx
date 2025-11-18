@@ -30,9 +30,10 @@ const OfferItem = () => {
 
   return (
     <div>
-      <div>
-        <h1 className="text-3xl font-semibold text-blue-500 p-6 text-center">
+      <div className="relative text-center py-8">
+        <h1 className="text-3xl font-semibold text-blue-500 p-6 text-center inline-block relative">
           offerItems Foods
+          <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500 transition-all duration-300"></span>
         </h1>
       </div>
       <Carousel
@@ -77,12 +78,18 @@ const OfferItem = () => {
                   <h2 className="text-lg font-semibold line-clamp-1">
                     {food.title}
                   </h2>
-                 <Link href={food._id}>
-                       <p className="text-blue-400 flex items-center gap-1 hover:underline text-sm">See info<BadgeInfo size={16}/></p>
-                 </Link>
+                  <Link href={`/FoodDetails/${food._id}`}>
+                    <p className="text-blue-400 flex items-center gap-1 hover:underline text-sm">
+                      See info
+                      <BadgeInfo size={16} />
+                    </p>
+                  </Link>
                   <div className="flex justify-between mx-2">
                     <p className="text-xl font-bold text-gray-600">
-                      <span className="text-red-300 line-through">{food.oldPrice}</span> {food.price} ৳ 
+                      <span className="text-red-300 line-through">
+                        {food.oldPrice}
+                      </span>{" "}
+                      {food.price} ৳
                     </p>
                     <div className="flex items-center gap-1">
                       <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
@@ -90,9 +97,10 @@ const OfferItem = () => {
                         {food.rating || 4.5}
                       </span>
                     </div>
-                   
                   </div>
-                   <button className="px-3 rounded-sm mx-auto flex cursor-pointer py-2 text-white bg-green-600">Add to Cart </button>
+                  <button className="px-3 rounded-sm mx-auto flex cursor-pointer py-2 text-white bg-green-600">
+                    Add to Cart{" "}
+                  </button>
                 </CardContent>
               </Card>
             </CarouselItem>
