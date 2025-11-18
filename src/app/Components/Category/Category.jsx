@@ -11,7 +11,9 @@ export default function Category() {
     const fetchCategory = async () => {
       try {
         const res = await axiosPublic.get("/api/category");
-        setCategories(res.data.data);
+        const data= await res.data.data;
+        console.log(data)
+        setCategories(data);
       } catch (error) {
         console.log("failed to fetch", error.message);
       }
@@ -30,7 +32,7 @@ export default function Category() {
             href={`/category/${cat.name}`}
             className="group"
           >
-            <div className="bg-white shadow-2xl hover:shadow-pink-500 transition-shadow-pink duration-300 rounded-xl p-4 border flex flex-col items-center cursor-pointer">
+            <div className="bg-white shadow-sm hover:shadow-pink-500 transition-shadow-pink duration-300 rounded-xl p-4 border flex flex-col items-center cursor-pointer">
 
               <img
                 src={cat.image}

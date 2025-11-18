@@ -1,7 +1,7 @@
 export default function Mamarhat() {
   return (
     <>
-      <div className="w-full  mt-10  bg-linear-to-t from-green-300 to-white" >
+      <div className="w-full  mt-10  bg-linear-to-t from-green-300 to-white py-12" >
         <h1 className="text-3xl text-center text-green-700 py-6 font-semibold">Why Mamarhat</h1>
         <div className="grid md:grid-cols-3 gap-3 container mx-auto w-2/3  ">
           <div className="w-56 h-60 hover:shadow-pink-500 shadow-sm hover:rounded-2xl">

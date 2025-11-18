@@ -31,7 +31,7 @@ const TrendingFood = () => {
   return (
     <div>
       <div>
-        <h1 className="text-3xl font-semibold text-blue-500 p-6">
+        <h1 className="text-3xl font-semibold text-blue-500 p-6 text-center">
           Trending Foods
         </h1>
       </div>

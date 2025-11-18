@@ -4,6 +4,7 @@ import useAxiosPublic from "./useAxiosPublic";
 
 export const useFoods = () => {
   const [foods, setFoods] = useState([]);
+  console.log(foods)
   const [trendingFoods, setTrendingFoods] = useState([]);
   const [freeDeliveryFoods, setFreeDeliveryFoods] = useState([]);
   const [offerItems, setOfferItems] = useState([]);
