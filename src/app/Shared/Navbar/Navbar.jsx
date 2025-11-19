@@ -32,7 +32,6 @@ export default function Navbar() {
  const handleLogout = async () => {
   try {
     if (localUser) {
-      // Custom login
       await axiosPublic.post("/api/auth/logout"); // custom backend logout
       localStorage.removeItem("user");
       setLocalUser(null);

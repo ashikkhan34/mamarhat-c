@@ -14,8 +14,14 @@ import { BadgeInfo, Heart, Star } from "lucide-react";
 import Image from "next/image";
 import { useFoods } from "@/app/Hooks/usefood";
 import Link from "next/link";
+import useUser from "@/app/Hooks/useUser";
+import { useCart } from "@/app/Hooks/useCart";
 
 const TrendingFood = () => {
+  const user = useUser();
+  const { addToCart } = useCart(user);
+
+
   const plugin = React.useRef(
     Autoplay({ delay: 1000, stopOnInteraction: false })
   );
@@ -32,7 +38,7 @@ const TrendingFood = () => {
     <div>
       <div className="relative text-center mb-8">
         <h1 className="text-3xl font-semibold text-blue-500 p-6 text-center inline-block relative">
-          offerItems Foods
+          Trending Foods
           <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500 transition-all duration-300"></span>
         </h1>
       </div>
@@ -65,11 +71,10 @@ const TrendingFood = () => {
                     className="absolute top-2 right-2 z-10 bg-blue-300/50 backdrop-blur-md p-2 rounded-full shadow hover:bg-pink-400 transition-all"
                   >
                     <Heart
-                      className={`w-5 h-5 transition ${
-                        favorites[food._id]
+                      className={`w-5 h-5 transition ${favorites[food._id]
                           ? "fill-red-500 text-red-500"
                           : "text-white"
-                      }`}
+                        }`}
                     />
                   </button>
                 </div>
@@ -95,7 +100,7 @@ const TrendingFood = () => {
                       </span>
                     </div>
                   </div>
-                  <button className="px-3 rounded-sm mx-auto flex cursor-pointer py-2 text-white bg-green-600">
+                  <button  onClick={() => addToCart(food)} className="px-3 rounded-sm mx-auto flex cursor-pointer py-2 text-white bg-green-600">
                     Add to Cart{" "}
                   </button>
                 </CardContent>
