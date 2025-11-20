@@ -7,8 +7,9 @@ import CartItem from "../Components/CartItem/CartItem";
 export default function CartPage() {
   const user = useUser();
   const { cart, loading, removeFromCart } = useCart(user);
+  console.log(cart)
 
-  const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const totalPrice = cart?.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   if (!user) return <p className="text-center p-10 text-xl">Please login first</p>;
 
@@ -22,7 +23,7 @@ export default function CartPage() {
         <p className="text-gray-600 text-lg">Your cart is empty.</p>
       ) : (
         <div className="space-y-5">
-          {cart.map((item) => (
+          {cart?.items.map((item) => (
             <CartItem key={item._id} item={item} removeFromCart={removeFromCart} />
           ))}
         </div>

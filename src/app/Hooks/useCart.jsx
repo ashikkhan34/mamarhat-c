@@ -5,7 +5,7 @@ import useAxiosPublic from "@/app/Hooks/useAxiosPublic";
 
 export const useCart = (user) => {
   const axiosPublic = useAxiosPublic();
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState();
   const [loading, setLoading] = useState(true);
 
   const getUserIdOrEmail = () => user?.id || user?.email;

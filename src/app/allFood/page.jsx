@@ -112,7 +112,7 @@ export default function AllFoodPage() {
             height={200}
             alt="image"
             src="/image/h.png"
-            className="md:w-[1000px] object-cover"
+            className="md:w-full object-cover"
           />
 
           <div className="md:flex justify-between">
