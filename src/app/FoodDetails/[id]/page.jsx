@@ -6,8 +6,12 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { useFoods } from "@/app/Hooks/usefood";
 import { FaCartArrowDown } from "react-icons/fa";
+import { useCart } from "@/app/Hooks/useCart";
+import useUser from "@/app/Hooks/useUser";
 
 export default function FoodDetailsPage() {
+  const user = useUser();
+  const { addToCart } = useCart(user);
   const params = useParams();
   const { foods } = useFoods();
   const { id } = params;
@@ -18,9 +22,8 @@ export default function FoodDetailsPage() {
   const [loading, setLoading] = useState(true);
   const [cartMessage, setCartMessage] = useState("");
 
-  // ---------------------------
+
   // Fetch Single Food
-  // ---------------------------
   useEffect(() => {
     const fetchFoodData = async () => {
       try {
@@ -38,9 +41,7 @@ export default function FoodDetailsPage() {
     fetchFoodData();
   }, [axiosPublic, id]);
 
-  // ---------------------------
   // Related Foods Filter
-  // ---------------------------
   useEffect(() => {
     if (food && foods?.length > 0) {
       const filtered = foods.filter(
@@ -56,17 +57,7 @@ export default function FoodDetailsPage() {
     }
   }, [food, foods]);
 
-  // ---------------------------
-  // Add to Cart Dummy Function
-  // ---------------------------
-  const handleAddToCart = () => {
-    setCartMessage("Added to cart successfully ✔");
-    setTimeout(() => setCartMessage(""), 2000);
-  };
 
-  // ---------------------------
-  // Skeleton Loader
-  // ---------------------------
   if (loading) {
     return (
       <div className="p-10 grid pt-20 grid-cols-1 md:grid-cols-2 gap-10 animate-pulse max-w-4xl mx-auto">
@@ -158,10 +149,10 @@ export default function FoodDetailsPage() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={handleAddToCart}
+            onClick={() => addToCart(food)}
             className="mt-5 w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl text-lg shadow-md flex items-center gap-2 text-center justify-center"
           >
-            Add to Cart <FaCartArrowDown/>
+            Add to Cart <FaCartArrowDown />
           </motion.button>
 
           {cartMessage && (
@@ -170,9 +161,8 @@ export default function FoodDetailsPage() {
         </motion.div>
       </motion.div>
 
-      {/* ---------------------------
-          Related Foods Section
-      --------------------------- */}
+
+      {/* Related Foods Section */}
       {related.length > 0 && (
         <div className="mt-16 max-w-5xl mx-auto">
           <h2 className="text-2xl font-bold text-green-800 mb-5">
@@ -180,28 +170,28 @@ export default function FoodDetailsPage() {
           </h2>
 
           <div className="grid  md:grid-cols-2 gap-6">
-            {related.map((item) => (
+            {related.map((food) => (
               <motion.div
-                key={item._id}
+                key={food._id}
                 whileHover={{ scale: 1.03 }}
                 className="bg-white p-4 rounded-2xl shadow-md cursor-pointer hover:shadow-lg transition  flex"
               >
                 <Image
-                  src={item.image}
-                  alt={item.title}
+                  src={food.image}
+                  alt={food.title}
                   width={100}
                   height={100}
                   className="rounded-xl"
                 />
                 <div className="ml-22">
                   <div className="justify-between flex">
-                    <h3 className="text-lg font-semibold mt-3">{item.title}</h3>
-                    <p className="text-green-600 font-bold">⭐{item.rating}</p>
+                    <h3 className="text-lg font-semibold mt-3">{food.title}</h3>
+                    <p className="text-green-600 font-bold">⭐{food.rating}</p>
                   </div>
-                  <p className="text-gray-500">{item.description}</p>
+                  <p className="text-gray-500">{food.description}</p>
                   <div className="flex">
-                    <p className="text-green-600 font-bold">Tk : {item.price}</p>
-                    <button className="ml-20 flex items-center border border-gray-500 px-2 rounded-sm gap-2 cursor-pointer hover:border-blue-600 bg-gray-100">Add to cart<FaCartArrowDown className="text-xm hover:text-green-600 text-blue-500"></FaCartArrowDown></button>
+                    <p className="text-green-600 font-bold">Tk : {food.price}</p>
+                    <button onClick={() => addToCart(food)} className="ml-20 flex items-center border border-gray-500 px-2 rounded-sm gap-2 cursor-pointer hover:border-blue-600 bg-gray-100">Add to cart<FaCartArrowDown className="text-xm hover:text-green-600 text-blue-500"></FaCartArrowDown></button>
                   </div>
                 </div>
               </motion.div>

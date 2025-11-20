@@ -62,6 +62,7 @@ export const useCart = (userId) => {
   // ---------------- CLEAR CART ----------------
   const clearCart = async () => {
     if (!userId) return;
+    
     try {
       await axiosPublic.delete(`/api/cart/${userId}`);
       toast.success("Cart cleared");

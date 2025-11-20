@@ -2,8 +2,12 @@
 import { BadgeInfo, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import useUser from "../Hooks/useUser";
+import { useCart } from "../Hooks/useCart";
 
 export default function FoodCard({ food }) {
+   const user = useUser();
+  const { addToCart } = useCart(user);
   return (
     <>
 
@@ -35,7 +39,7 @@ export default function FoodCard({ food }) {
             {food.rating}
           </p>
         </div>
-        <button className="px-4 py-2 rounded-sm bg-green-500 hover:bg-green-800  text-white cursor-pointer hover:scale-110 duration-500 transition-all  flex mx-auto">
+        <button onClick={() => addToCart(food)} className="px-4 py-2 rounded-sm bg-green-500 hover:bg-green-800  text-white cursor-pointer hover:scale-110 duration-500 transition-all  flex mx-auto">
           Add to Cart
         </button>
       </div>

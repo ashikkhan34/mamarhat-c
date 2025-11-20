@@ -1,11 +1,13 @@
 "use client";
 
+import Image from "next/image";
+
 
 export default function CartItem({ item, removeFromCart  }) {
 
 
   return (
-    <div className="p-4 rounded-xl shadow-md bg-white">
+    <div className="p-4 rounded-xl shadow-md bg-white mb-4">
       <table className="w-full text-left table-auto">
         <thead>
           <tr className="border-b border-gray-400">
@@ -18,7 +20,9 @@ export default function CartItem({ item, removeFromCart  }) {
         <tbody>
           <tr>
             <td className="py-2">
-              <img
+              <Image
+              width={400}
+              height={200}
                 src={item.foodId.image}
                 alt={item.foodId.title}
                 className="w-16 h-16 object-cover rounded"

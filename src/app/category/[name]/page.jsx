@@ -1,11 +1,15 @@
 "use client";
 
+import { useCart } from "@/app/Hooks/useCart";
 import { useFoods } from "@/app/Hooks/usefood";
+import useUser from "@/app/Hooks/useUser";
 import { BadgeInfo, Star } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
 export default function CategoryPage() {
+   const user = useUser();
+  const { addToCart } = useCart(user);
   const params = useParams();
   const { name } = params;
 
@@ -52,7 +56,7 @@ export default function CategoryPage() {
                   </span>
                 </div>
               </div>
-              <button className="px-3 rounded-sm mx-auto flex cursor-pointer py-2 text-white bg-green-600">Add to Cart </button>
+              <button onClick={() => addToCart(food)} className="px-3 rounded-sm mx-auto flex cursor-pointer py-2 text-white bg-green-600">Add to Cart </button>
 
             </div>
           ))}

@@ -14,8 +14,12 @@ import { BadgeInfo, Heart, Star } from "lucide-react";
 import Image from "next/image";
 import { useFoods } from "@/app/Hooks/usefood";
 import Link from "next/link";
+import useUser from "@/app/Hooks/useUser";
+import { useCart } from "@/app/Hooks/useCart";
 
 const OfferItem = () => {
+   const user = useUser();
+  const { addToCart } = useCart(user);
   const plugin = React.useRef(
     Autoplay({ delay: 1000, stopOnInteraction: false })
   );
@@ -98,7 +102,7 @@ const OfferItem = () => {
                       </span>
                     </div>
                   </div>
-                  <button className="px-3 rounded-sm mx-auto flex cursor-pointer py-2 text-white bg-green-600">
+                  <button onClick={() => addToCart(food)} className="px-3 rounded-sm mx-auto flex cursor-pointer py-2 text-white bg-green-600">
                     Add to Cart{" "}
                   </button>
                 </CardContent>
