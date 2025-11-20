@@ -2,19 +2,19 @@
 
 import { useState, useEffect } from "react";
 import useAxiosPublic from "@/app/Hooks/useAxiosPublic";
+import toast from "react-hot-toast";
 
-export const useCart = (user) => {
+export const useCart = (userId) => {
   const axiosPublic = useAxiosPublic();
-  const [cart, setCart] = useState();
+  const [cart, setCart] = useState([]); // <-- use singular 'cart' for clarity
   const [loading, setLoading] = useState(true);
 
-  const getUserIdOrEmail = () => user?.id || user?.email;
-
+  // ---------------- FETCH CART ----------------
   const fetchCart = async () => {
-    if (!getUserIdOrEmail()) return;
+    if (!userId) return;
     try {
       setLoading(true);
-      const res = await axiosPublic.get(`/api/cart/${getUserIdOrEmail()}`);
+      const res = await axiosPublic.get(`/api/cart/${userId}`);
       setCart(res.data.data || []);
     } catch (err) {
       console.log("Cart fetch error:", err);
@@ -24,37 +24,66 @@ export const useCart = (user) => {
   };
 
   useEffect(() => {
-    fetchCart();
-  }, [user]);
+    if (userId) fetchCart();
+  }, [userId]);
 
-  // Add to cart
+  // ---------------- ADD TO CART ----------------
   const addToCart = async (food, quantity = 1) => {
-    if (!getUserIdOrEmail()) return alert("Please login first");
+    if (!userId) return toast.error("Please login first");
 
     const payload = {
-      userId: user?.id || null,
-      items: [{ foodId: food._id, quantity }],
-      totalPrice: food.price * quantity
+      userId,
+      foodId: food._id,
+      quantity,
     };
 
     try {
-      await axiosPublic.post(`/api/cart/add`, payload);
-      fetchCart();
+      await axiosPublic.post("/api/cart/add", payload);
+      toast.success(`${food.title} added to cart 🎉`, { duration: 1500 });
+      await fetchCart(); // fetchCart must be awaited
     } catch (err) {
       console.log("Add to cart error:", err);
+      toast.error("Failed to add item!");
     }
   };
 
-  // Remove from cart
+  // ---------------- REMOVE SINGLE ITEM ----------------
   const removeFromCart = async (itemId) => {
-    if (!getUserIdOrEmail()) return;
+    if (!userId) return;
     try {
-      await axiosPublic.delete(`/api/cart/${getUserIdOrEmail()}/${itemId}`);
-      fetchCart();
+      await axiosPublic.delete(`/api/cart/item/${itemId}`);
+      toast.success("Item removed");
+      await fetchCart();
     } catch (err) {
-      console.log("Remove from cart error:", err);
+      console.log("Remove item error:", err);
     }
   };
 
-  return { cart, loading, addToCart, removeFromCart, fetchCart };
+  // ---------------- CLEAR CART ----------------
+  const clearCart = async () => {
+    if (!userId) return;
+    try {
+      await axiosPublic.delete(`/api/cart/${userId}`);
+      toast.success("Cart cleared");
+      setCart([]); // immediately empty
+    } catch (err) {
+      console.log("Clear cart error:", err);
+    }
+  };
+
+  // ---------------- TOTAL PRICE ----------------
+  const totalPrice = cart.reduce(
+    (sum, item) => sum + item.foodId.price * item.quantity,
+    0
+  );
+
+  return {
+    cart,
+    loading,
+    totalPrice,
+    addToCart,
+    removeFromCart,
+    clearCart,
+    fetchCart,
+  };
 };

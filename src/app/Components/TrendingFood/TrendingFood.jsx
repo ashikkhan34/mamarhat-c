@@ -33,6 +33,9 @@ const TrendingFood = () => {
   const toggleFav = (id) => {
     setFavorites((prev) => ({ ...prev, [id]: !prev[id] }));
   };
+  const handleAddToCart = () =>{
+    addToCart()
+  }
 
   return (
     <div>

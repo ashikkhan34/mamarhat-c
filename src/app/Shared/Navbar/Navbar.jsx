@@ -6,12 +6,16 @@ import { ShoppingCart, Menu, X, Heart } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import useAxiosPublic from "@/app/Hooks/useAxiosPublic";
+import { useCart } from "@/app/Hooks/useCart";
+import useUser from "@/app/Hooks/useUser";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const axiosPublic = useAxiosPublic();
+  const userId = useUser()
+  const {cart} = useCart(userId)
 
   // CUSTOM LOGIN USER (localStorage)
   const [localUser, setLocalUser] = useState(null);
@@ -113,11 +117,13 @@ export default function Navbar() {
 
           {/* Cart Icon */}
           <Link href="/cart" className="relative">
+          {cart?.length}
             <ShoppingCart size={26} />
           </Link>
 
           {/* Wishlist */}
           <Link href="/favorite" className="relative">
+          
             <Heart size={26} />
           </Link>
 
