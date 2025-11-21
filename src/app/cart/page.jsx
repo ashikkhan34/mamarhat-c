@@ -39,7 +39,7 @@ export default function CartPage() {
         <div className="w-96 py-6 bg-gray-100 rounded-md shadow-md hover:shadow-blue-500 mb-12 ">
           <h1 className=" text-center text-2xl text-gray-400 font-semibold">Order Summary</h1>
           <p className=" flex justify-center text-gray-500 ">Total Price :  <strong className="flex items-center gap-2">   {totalPrice.toFixed(2)} <TbCoinTaka /></strong></p>
-          <Link href="/checkout">
+          <Link href="/payment">
             <button className="px-6 mt-2 mx-auto flex items-center gap-2 bg-gray-300 border border-gray-500 rounded-sm cursor-pointer py-2">
               Proceed to Checkout <MdOutlineShoppingCartCheckout />
             </button>

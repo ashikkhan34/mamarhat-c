@@ -16,10 +16,16 @@ import { useFoods } from "@/app/Hooks/usefood";
 import Link from "next/link";
 import useUser from "@/app/Hooks/useUser";
 import { useCart } from "@/app/Hooks/useCart";
+import { useFavorite } from "@/app/Hooks/useFavorite";
 
 const FreeDelivery = () => {
-   const user = useUser();
+  const user = useUser();
   const { addToCart } = useCart(user);
+  const {
+    addFavorite,
+    removeFavorite,
+    isFavorite,
+  } = useFavorite(user);
   const plugin = React.useRef(
     Autoplay({ delay: 1000, stopOnInteraction: false })
   );
@@ -65,15 +71,19 @@ const FreeDelivery = () => {
 
                   {/* Favorite Button */}
                   <button
-                    onClick={() => toggleFav(food._id)}
+                    onClick={() => {
+                      if (!user) return toast.error("Please Login First");
+                      isFavorite(food._id)
+                        ? removeFavorite(food._id)
+                        : addFavorite(food._id);
+                    }}
                     className="absolute top-2 right-2 z-10 bg-blue-300/50 backdrop-blur-md p-2 rounded-full shadow hover:bg-pink-400 transition-all"
                   >
                     <Heart
-                      className={`w-5 h-5 transition ${
-                        favorites[food._id]
+                      className={`w-5 h-5 transition ${isFavorite(food._id)
                           ? "fill-red-500 text-red-500"
                           : "text-white"
-                      }`}
+                        }`}
                     />
                   </button>
                 </div>

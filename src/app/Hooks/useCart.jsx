@@ -8,6 +8,7 @@ export const useCart = (userId) => {
   const axiosPublic = useAxiosPublic();
   const [cart, setCart] = useState([]); 
   const [loading, setLoading] = useState(true);
+  console.log(cart)
 
   // ---------------- FETCH CART ----------------
   const fetchCart = async () => {

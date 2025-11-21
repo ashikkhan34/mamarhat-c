@@ -115,7 +115,7 @@ export default function Navbar() {
         </ul>
 
         {/* Right Side: Cart + User / Login */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className=" flex items-center gap-4">
 
           {/* Cart Icon */}
           <Link href="/cart" className="relative">

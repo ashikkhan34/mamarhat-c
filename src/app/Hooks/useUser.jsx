@@ -19,8 +19,8 @@ export default function useUser() {
       }
     }
 
-    if (session?.user?.email) {
-      setUserData(session.user.email);
+    if (session?.user?._id) {
+      setUserData(session.user._id);
     }
   }, [session]);
 

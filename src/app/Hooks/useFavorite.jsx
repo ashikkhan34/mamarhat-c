@@ -13,7 +13,7 @@ export const useFavorite = (userId) => {
   console.log(favorites)
   const [loading, setLoading] = useState(true);
 
-  // ⛳ Fetch User Favorites
+  //  Fetch User Favorites
   useEffect(() => {
     if (!userId) return;
 
@@ -31,8 +31,8 @@ export const useFavorite = (userId) => {
     fetchFavorites();
   }, [userId]);
 
-  // ❤️ Add to Favorite
-  const addFavorite = async (foodId) => {
+  //  Add to Favorite
+  const addFavorite = async (foodId,food) => {
     if (!userId) return;
 
     try {
@@ -40,7 +40,7 @@ export const useFavorite = (userId) => {
         userId,
         foodId,
       });
-
+      toast.success("add favorite food ")
       // UI update instantly
       setFavorites((prev) => [
         ...prev,
@@ -51,7 +51,7 @@ export const useFavorite = (userId) => {
     }
   };
 
-  // 💔 Remove Favorite
+  //  Remove Favorite
   const removeFavorite = async (foodId) => {
     if (!userId) return;
 
@@ -75,7 +75,7 @@ export const useFavorite = (userId) => {
     }
   };
 
-  // ⭐ Check if a food is already favorite
+  //  Check if a food is already favorite
   const isFavorite = (foodId) => {
     return favorites.some(
       (fav) =>
