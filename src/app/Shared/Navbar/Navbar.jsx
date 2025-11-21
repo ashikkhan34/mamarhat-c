@@ -8,6 +8,7 @@ import { signOut, useSession } from "next-auth/react";
 import useAxiosPublic from "@/app/Hooks/useAxiosPublic";
 import { useCart } from "@/app/Hooks/useCart";
 import useUser from "@/app/Hooks/useUser";
+import { useFavorite } from "@/app/Hooks/useFavorite";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -16,6 +17,7 @@ export default function Navbar() {
   const axiosPublic = useAxiosPublic();
   const userId = useUser()
   const {cart} = useCart(userId)
+  const {favorites} = useFavorite(userId)
 
   // CUSTOM LOGIN USER (localStorage)
   const [localUser, setLocalUser] = useState(null);
@@ -123,7 +125,7 @@ export default function Navbar() {
 
           {/* Wishlist */}
           <Link href="/favorite" className="relative">
-          
+          <p>{favorites?.length}</p>
             <Heart size={26} />
           </Link>
 

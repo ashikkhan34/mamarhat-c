@@ -23,13 +23,13 @@ export default function CartItem({ item, removeFromCart  }) {
               <Image
               width={400}
               height={200}
-                src={item.foodId.image}
-                alt={item.foodId.title}
+                src={item.foodId?.image}
+                alt={item.foodId?.title}
                 className="w-16 h-16 object-cover rounded"
               />
             </td>
-            <td className="py-2">{item.foodId.title}</td>
-            <td className="py-2">৳ {item.foodId.price}</td>
+            <td className="py-2">{item.foodId?.title}</td>
+            <td className="py-2">৳ {item.foodId?.price}</td>
             <td className="py-2">
               <button
                 onClick={() => removeFromCart(item._id)}

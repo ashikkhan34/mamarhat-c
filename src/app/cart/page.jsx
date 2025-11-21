@@ -9,7 +9,6 @@ import Link from "next/link";
 
 export default function CartPage() {
   const user = useUser();
-  console.log(user)
   const { cart, loading, totalPrice, removeFromCart, clearCart } = useCart(user);
   console.log(cart)
 

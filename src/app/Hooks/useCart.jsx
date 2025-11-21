@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 export const useCart = (userId) => {
   const axiosPublic = useAxiosPublic();
-  const [cart, setCart] = useState([]); // <-- use singular 'cart' for clarity
+  const [cart, setCart] = useState([]); 
   const [loading, setLoading] = useState(true);
 
   // ---------------- FETCH CART ----------------
@@ -66,7 +66,7 @@ export const useCart = (userId) => {
     try {
       await axiosPublic.delete(`/api/cart/${userId}`);
       toast.success("Cart cleared");
-      setCart([]); // immediately empty
+      setCart([]); 
     } catch (err) {
       console.log("Clear cart error:", err);
     }
@@ -74,7 +74,7 @@ export const useCart = (userId) => {
 
   // ---------------- TOTAL PRICE ----------------
   const totalPrice = cart.reduce(
-    (sum, item) => sum + item.foodId.price * item.quantity,
+    (sum, item) => sum + item.foodId?.price * item.quantity,
     0
   );
 
