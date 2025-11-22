@@ -3,6 +3,7 @@ import "./globals.css";
 import Providers from "./providers";
 import { Toaster } from "react-hot-toast";
 import { ReduxProvider } from "./Redux/Provider";
+import ClientLayout from "./clientLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,8 +26,8 @@ export default function RootLayout({ children }) {
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>
           <ReduxProvider>
-            {/* We will detect dashboard in a client wrapper */}
-            {children}
+            
+            <ClientLayout>{children}</ClientLayout>
           </ReduxProvider>
         </Providers>
 
