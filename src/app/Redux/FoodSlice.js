@@ -1,18 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:4000/api/food";
+const BASE_URL = "http://localhost:4000/api/food/";
 
-// 1️⃣ All foods fetch
+// All foods fetch
 export const fetchFoods = createAsyncThunk(
   "foods/fetchFoods",
   async () => {
     const res = await axios.get(BASE_URL);
-    return res.data;
+    return res.data.data;
   }
 );
 
-// 2️⃣ Single food fetch
+//  Single food fetch
 export const fetchSingleFood = createAsyncThunk(
   "foods/fetchSingleFood",
   async (id) => {
@@ -21,7 +21,7 @@ export const fetchSingleFood = createAsyncThunk(
   }
 );
 
-// 3️⃣ Add food
+// Add food
 export const addFood = createAsyncThunk(
   "foods/addFood",
   async (foodData) => {
@@ -30,7 +30,7 @@ export const addFood = createAsyncThunk(
   }
 );
 
-// 4️⃣ Update food
+// Update food
 export const updateFood = createAsyncThunk(
   "foods/updateFood",
   async ({ id, updatedData }) => {
@@ -39,7 +39,7 @@ export const updateFood = createAsyncThunk(
   }
 );
 
-// 5️⃣ Delete food
+//  Delete food
 export const deleteFood = createAsyncThunk(
   "foods/deleteFood",
   async (id) => {

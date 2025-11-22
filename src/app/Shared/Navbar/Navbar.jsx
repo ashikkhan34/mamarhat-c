@@ -23,11 +23,14 @@ export default function Navbar() {
   const [localUser, setLocalUser] = useState(null);
 
   useEffect(() => {
-    const savedUser = localStorage.getItem("user");
-    if (savedUser) {
+  const savedUser = localStorage.getItem("user");
+  if (savedUser) {
+    setTimeout(() => {
       setLocalUser(JSON.parse(savedUser));
-    }
-  }, []);
+    }, 0); // ✔ async - safe
+  }
+}, []);
+
 
   // NEXTAUTH SOCIAL LOGIN USER
   const { data: session } = useSession();
