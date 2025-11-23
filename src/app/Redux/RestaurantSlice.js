@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:4000/api/restaurant";
+const BASE_URL = "https://mamarhat-s.vercel.app/api/restaurant";
 
 // 🔹 Fetch all restaurants
 export const fetchRestaurants = createAsyncThunk(
