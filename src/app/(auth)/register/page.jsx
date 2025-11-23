@@ -66,9 +66,9 @@ export default function Page() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center py-12 px-4">
+        <div className="min-h-screen flex pt-22 items-center justify-center py-12 px-4">
             <Toaster />
-            <div className=" shadow-2xl rounded-2xl p-8 w-full max-w-md border border-gray-100 dark:border-blue-800">
+            <div className=" shadow-2xl rounded-2xl p-8 w-full max-w-md border-gray-100">
                 <h2 className="text-3xl font-bold text-center text-indigo-600 mb-6">
                     Create Your Account
                 </h2>

@@ -66,7 +66,7 @@ export default function LoginPage() {
       <Toaster />
       <div className="shadow-xl rounded-2xl p-8 w-full max-w-md bg-white border border-gray-100">
         <h2 className="text-3xl font-extrabold text-center text-indigo-600 mb-2">
-          Welcome Back 👋
+          Welcome Back
         </h2>
         <p className="text-center text-gray-500 mb-6">
           Log in to access your account
